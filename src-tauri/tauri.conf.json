@@ -1,7 +1,7 @@
 {
   "productName": "audio-instruct",
   "version": "0.0.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "audio-instruct.llm",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
@@ -9,6 +9,7 @@
     "frontendDist": "../build"
   },
   "app": {
+    "macOSPrivateApi": true,
     "windows": [
       {
         "title": "Instruct App",

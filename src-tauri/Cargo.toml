@@ -2,8 +2,9 @@
 name = "audio-instruct"
 version = "0.0.0"
 description = "A Tauri App"
-authors = ["you"]
+authors = ["Anubhab <anubhab.bandyopadhyay@gmail.com>"]
 edition = "2021"
+resolver = "2"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -12,14 +13,17 @@ tauri-build = { version = "2.0.0-beta", features = [] }
 
 [dependencies]
 anyhow              = "1"
+byteorder           = { version = "1" }
 candle-core         = { git = "https://github.com/huggingface/candle.git", version = "0.6.0", features = ["metal"] }
 candle-transformers = { git = "https://github.com/huggingface/candle.git", version = "0.6.0" }
 candle-nn           = { git = "https://github.com/huggingface/candle.git", version = "0.6.0" }
 hf-hub              = { version = "0" }
 log                 = "0"
 pretty_env_logger   = "0"
-serde = { version   = "1", features = ["derive"] }
+serde               = { version   = "1", features = ["derive"] }
 serde_json          = "1"
-tauri = { version   = "2.0.0-beta", features = [] }
+tauri               = { version   = "2.0.0-beta", features = [ "macos-private-api"] }
+tauri-plugin-dialog = "2.0.0-alpha.2"
+tauri-plugin-fs     = "2.0.0-beta"
 tauri-plugin-shell  = "2.0.0-beta"
 tokenizers          = { version = "0" }
