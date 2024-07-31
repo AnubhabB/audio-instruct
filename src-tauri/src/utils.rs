@@ -1,24 +1,10 @@
-use std::{
-    fs::create_dir_all,
-    path::{Path, PathBuf},
-};
+use std::path::Path;
 
-use anyhow::{anyhow, Result};
+use anyhow::Result;
 use candle_core::Device;
 use hf_hub::api::sync::ApiBuilder;
 // use tauri::api::path::data_dir;
 use tokenizers::Tokenizer;
-
-/// helper function to create a directory if it doesn't exist
-pub fn create_dir_if_not_exists(p: &Path) -> Result<()> {
-    if p.is_dir() {
-        return Ok(());
-    }
-
-    create_dir_all(p)?;
-
-    Ok(())
-}
 
 /// a helper function to download a file and move to a specific path from `huggingface hub`
 pub fn hf_download(dir: &Path, repo: &str, file: &str) -> Result<()> {
