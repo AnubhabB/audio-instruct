@@ -27,6 +27,10 @@ fn main() {
 
             Ok(())
         })
+        .invoke_handler(tauri::generate_handler![
+            crate::commands::ask,
+            crate::commands::audio_chunk
+        ])
         .build(tauri::generate_context!())
         .expect("Failed to build app!");
     

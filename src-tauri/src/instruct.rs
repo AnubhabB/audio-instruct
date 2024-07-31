@@ -2,14 +2,7 @@ use std::{path::PathBuf, sync::{mpsc::{channel, Receiver, Sender}, Arc}, thread}
 
 use anyhow::Result;
 
-use crate::{llama::LlamaWrap, whisper::WhisperWrap};
-
-#[derive(Debug, Clone, Copy)]
-pub enum Event {
-    AudioStart,
-    AudioEnd,
-    AudioData
-}
+use crate::{commands::Response, llama::LlamaWrap, whisper::WhisperWrap};
 
 /// A struct to maintain our app state
 pub struct Instruct {
@@ -20,7 +13,7 @@ pub struct Instruct {
     /// holds the `distil-whisper` model and the associated methods
     whisper: WhisperWrap,
     /// a channel for triggering Instruct methods through events
-    send: Sender<Event>,
+    send: Sender<Vec<f32>>,
 }
 
 impl Instruct {
@@ -43,7 +36,24 @@ impl Instruct {
         Ok(app)
     }
 
-    fn listen(app: Arc<Instruct>, recv: Receiver<Event>) {
+    /// Exposes an API to send data into our MPSC channel
+    pub fn send(&self, data: Vec<f32>) -> Result<()> {
+        self.send.send(data)?;
+        
+        Ok(())
+    }
 
+    fn listen(app: Arc<Instruct>, recv: Receiver<Vec<f32>>) {
+        while let Ok(next) = recv.recv() {
+            
+        }
+    }
+
+    pub fn text(&self, istruct: &str) -> Result<Response> {
+        todo!()
+    }
+
+    pub fn audio(&self) -> Result<Response> {
+        todo!()
     }
 }

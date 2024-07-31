@@ -60,7 +60,15 @@ pub fn prompt(txt: &str) -> String {
 
 /// A helper function to detect the compute device
 pub fn device() -> Result<Device> {
-    let dev = Device::new_metal(0)?;
+    let dev = if cfg!(feature = "metal") {
+        Device::new_metal(0)?
+    } else if cfg!(feature = "cuda") {
+        Device::new_cuda(0)?
+    } else {
+        Device::Cpu
+    };
+
+    info!("Device: {dev:?}");
 
     Ok(dev)
 }
@@ -71,4 +79,12 @@ pub fn token_id(tokenizer: &Tokenizer, token: &str) -> Result<u32> {
         None => anyhow::bail!("no token-id for {token}"),
         Some(id) => Ok(id),
     }
+}
+
+/// A helper function to convert incomig &[u8] to Vec<f32>
+pub fn bytes_to_f32(bytes: &[u8]) -> Vec<f32> {
+    bytes
+        .chunks_exact(4)
+        .map(|chunk| f32::from_le_bytes([chunk[0], chunk[1], chunk[2], chunk[3]]))
+        .collect()
 }

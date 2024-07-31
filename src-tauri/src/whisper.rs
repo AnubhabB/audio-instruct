@@ -3,7 +3,7 @@ use std::path::{Path, PathBuf};
 use anyhow::{anyhow, Result};
 use candle_core::Device;
 use candle_nn::VarBuilder;
-use candle_transformers::models::whisper::{model::Whisper, Config, DTYPE};
+use candle_transformers::models::whisper::{model::Whisper, Config};
 use tokenizers::Tokenizer;
 
 use crate::utils::{device, hf_download};
