@@ -13,13 +13,13 @@ use crate::{instruct::Instruct, utils::bytes_to_f32};
 #[derive(Debug, Deserialize)]
 pub struct Command {
     text: Option<String>,
-    audio: Option<bool>
+    audio: Option<bool>,
 }
 
 /// Enum to maintain what kind of instruction this is
 pub enum Mode {
     Text(String),
-    Audio
+    Audio,
 }
 
 impl Command {
@@ -38,7 +38,8 @@ impl Command {
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Response {
     text: String,
-    meta: Meta
+    meta: Meta,
+    instruct: String,
 }
 
 /// A struct to hold some metadata and additional information about the QA/ Response/ Instruction etc.
@@ -47,35 +48,33 @@ pub struct Meta {
     // number of tokens generated
     n_tokens: u32,
     // number of seconds elapsed
-    n_secs: u64
+    n_secs: u64,
 }
 
 impl Response {
-    pub fn new(txt: &str, n_tokens: u32, n_secs: u64) -> Self {
+    pub fn new(instruct: &str, txt: &str, n_tokens: u32, n_secs: u64) -> Self {
         Self {
+            instruct: instruct.to_string(),
             text: txt.to_string(),
-            meta: Meta { n_secs, n_tokens }
+            meta: Meta { n_secs, n_tokens },
         }
     }
 }
 
 /// A command to accept incoming `instruction` and respond with the `inference`
 #[tauri::command]
-pub fn ask(
-    app: tauri::State<'_, Arc<Instruct>>,
-    cmd: Command
-) -> Result<Response, &'static str> {
+pub fn ask(app: tauri::State<'_, Arc<Instruct>>, cmd: Command) -> Result<Response, &'static str> {
     let command = match cmd.mode() {
         Ok(c) => c,
         Err(e) => {
             error!("ask: invalid incoming command: {e:?}");
-            return Err("invalid command")
+            return Err("invalid command");
         }
     };
-    
+
     let res = match command {
         Mode::Text(t) => app.text(&t),
-        Mode::Audio => app.audio()
+        Mode::Audio => app.audio(),
     };
 
     match res {
@@ -92,16 +91,17 @@ pub fn ask(
 #[tauri::command]
 pub fn audio_chunk(
     app: tauri::State<'_, Arc<Instruct>>,
-    req: ipc::Request<'_>
+    req: ipc::Request<'_>,
 ) -> Result<(), &'static str> {
     if let tauri::ipc::InvokeBody::Raw(data) = req.body() {
         let chunk = bytes_to_f32(&data[..]);
+
         if let Err(e) = app.send(chunk) {
             error!("audio_chunk: error: {e:?}");
-            return Err("invalid chunk")    
+            return Err("invalid chunk");
         }
     } else {
-        return Err("invalid chunk")
+        return Err("invalid chunk");
     }
     Ok(())
 }

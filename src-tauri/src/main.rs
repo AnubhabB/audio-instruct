@@ -22,7 +22,7 @@ fn main() {
         .setup(|tauri_app| {
             let datadir = tauri_app.path().app_data_dir()?;
             // Initialize the instruct app
-            let instruct = Instruct::new(datadir.clone()).expect("initialization failed");            
+            let instruct = Instruct::new(datadir.clone()).expect("initialization failed");
             tauri_app.manage(instruct);
 
             Ok(())
@@ -33,7 +33,7 @@ fn main() {
         ])
         .build(tauri::generate_context!())
         .expect("Failed to build app!");
-    
+
     // finally, lets run our app
     app.run(|_app_handle, event| {
         if let tauri::RunEvent::ExitRequested { api, .. } = event {

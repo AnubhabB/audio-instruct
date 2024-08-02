@@ -249,6 +249,7 @@ dependencies = [
  "hf-hub",
  "log",
  "pretty_env_logger",
+ "rand 0.7.3",
  "serde",
  "serde_json",
  "tauri",
@@ -521,7 +522,9 @@ version = "0.6.0"
 source = "git+https://github.com/huggingface/candle.git#636eff652aca3f0b1228535f7a67ebf61e49d813"
 dependencies = [
  "candle-core",
+ "candle-metal-kernels",
  "half",
+ "metal",
  "num-traits",
  "rayon",
  "safetensors",
