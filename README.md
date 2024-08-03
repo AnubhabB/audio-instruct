@@ -1,6 +1,6 @@
 # Voice Assistant Desktop App with LLaMA3 and Whisper in Rust
 
-Created as a part of the blog [series](https://blog.anubhab.me/tech/voice-assistant-desktop-app-with-llama3-and-whisper-in-rust/):
+Created as a part of the blog [series](https://blog.anubhab.me/series/voice-assistant-desktop-app-with-llama3-and-whisper-in-rust/):
 
 - [Part I: The Setup and Text Model](https://blog.anubhab.me/tech/voice-assistant-desktop-app-with-llama3-and-whisper-in-rust/part-1/)
 - [Part II: The Audio Pipeline and Wrap up](https://blog.anubhab.me/tech/voice-assistant-desktop-app-with-llama3-and-whisper-in-rust/part-2/)
