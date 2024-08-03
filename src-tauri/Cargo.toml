@@ -33,4 +33,4 @@ tokenizers          = { version = "0" }
 [features]
 cuda = ["candle-core/cuda", "candle-transformers/cuda", "candle-nn/cuda"]
 metal = ["candle-core/metal", "candle-transformers/metal", "candle-nn/metal"]
-default = ["metal"]
+default = []
