@@ -5,6 +5,14 @@ Created as a part of the blog [series](https://blog.anubhab.me/tech/voice-assist
 - [Part I: The Setup and Text Model](https://blog.anubhab.me/tech/voice-assistant-desktop-app-with-llama3-and-whisper-in-rust/part-1/)
 - [Part II: The Audio Pipeline and Wrap up](https://blog.anubhab.me/tech/voice-assistant-desktop-app-with-llama3-and-whisper-in-rust/part-2/)
 
+## The output
+
+
+https://github.com/user-attachments/assets/314f43ab-b810-48f6-b076-aca6c5ebe5dc
+
+
+
+
 ## License
 
 This project is licensed under either of
