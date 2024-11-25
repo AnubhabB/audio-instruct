@@ -14,9 +14,9 @@ tauri-build = { version = "2.0.0-beta", features = [] }
 [dependencies]
 anyhow              = "1"
 byteorder           = { version = "1" }
-candle-core         = { git = "https://github.com/huggingface/candle.git", version = "0.6.0", features = [] }
-candle-transformers = { git = "https://github.com/huggingface/candle.git", version = "0.6.0", features = [] }
-candle-nn           = { git = "https://github.com/huggingface/candle.git", version = "0.6.0", features = [] }
+candle-core         = { git = "https://github.com/huggingface/candle.git", version = "0", features = [] }
+candle-transformers = { git = "https://github.com/huggingface/candle.git", version = "0", features = [] }
+candle-nn           = { git = "https://github.com/huggingface/candle.git", version = "0", features = [] }
 hf-hub              = { version = "0" }
 log                 = "0"
 pretty_env_logger   = "0"
